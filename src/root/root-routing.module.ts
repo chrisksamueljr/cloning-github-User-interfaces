@@ -8,7 +8,7 @@ import { TopReposComponent } from './top-repos/top-repos.component';
 const routes: Routes = [
   { path: '', component: TopReposComponent },
   { path: 'user', loadChildren: './user/user.module#UserModule'},
-  { path: 'repo', loadChildren: './repo/repo.module#RepoModule'}
+  // { path: 'repo', loadChildren: './repo/repo.module#RepoModule'}
 ]
 
 @NgModule({
@@ -19,4 +19,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class RootRoutingModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-repo',
+  selector: 'repo',
   templateUrl: './repo.component.html',
   styleUrls: ['./repo.component.css']
 })

@@ -1,4 +1,4 @@
-export interface Repo {
+export class Repo {
   id: number;
   owner: Repo;
   name: string;
