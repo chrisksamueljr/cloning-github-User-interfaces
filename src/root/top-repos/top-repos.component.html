@@ -42,7 +42,14 @@
         </a>
       </h4>
       {{r.description}} 
-  
+      <ul class="list-inline text-muted">
+        <li *ngIf="r.language" class="list-inline-item">
+          {{r.language}}
+        </li>
+        <li *ngIf="r.stargazers_count" class="list-inline-item">
+          <i class="fa fa-star fa-fw" aria-hidden="true"></i> {{r.stargazers_count | largeNumberShorten}}
+        </li>
+      </ul>
       <!-- <ul class="list-inline text-muted">
         <li *ngIf="repo.language" class="list-inline-item">
           {{repo.language}}
