@@ -20,13 +20,13 @@ export class TopReposComponent implements OnInit {
 
   ngOnInit() {
      this.loadRepos();
-     console.log(this.repo);
+    //  console.log(this.repo);
    }
 
   loadRepos(): void {
-    // let d = new Date();
-    // d.setDate(d.getDate() - this.dayInterval);
-    this.ghas.getPopularRepos().subscribe(repo => this.repo = repo); 
+    let d = new Date();
+    d.setDate(d.getDate() - this.dayInterval);
+    this.ghas.getPopularRepos(d).subscribe(repo => this.repo = repo); 
   }
 
 }

@@ -5,7 +5,7 @@ import { Repo } from '../repo/types/repo.types';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import {map} from 'rxjs';
+// import {map} from 'rxjs';
 
 // Import rxjs modules
 // 'rxjs/add/observable/of'
@@ -31,23 +31,22 @@ export class GithubApiService {
 
 
   private configurationURL = 'https://api.github.com';
-  popularRepoUrl = `https://api.github.com/search/repositories?q=created:2019-04-01&sort=stars`;
+  popularRepoUrl = `https://api.github.com/search/repositories?q=created:`;
   private headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   
   constructor(private http: HttpClient) { }
-
-
     private handleError(error: any) : Promise<any> {
       console.log('An Error occured', error);
 
       return Promise.reject(error.message || error);
     }
 
-  getPopularRepos(): Observable<Repo[]> {
-    // let formattedDate = moment(from).utc().format('YYYY-MM-DD');
+  getPopularRepos(from: Date): Observable<Repo[]> {
+    let formattedDate = moment(from).utc().format('YYYY-MM-DD');
     // let params = new HttpParams();
     // params = params.set('HttpParams', formattedDate);
-    return this.http.get<Repo[]>(this.popularRepoUrl);
+    console.log(`${this.popularRepoUrl}${formattedDate}&sort=stars`);
+    return this.http.get<Repo[]>(`${this.popularRepoUrl}${formattedDate}&sort=stars`);
     // .pipe(
     //   map(res => res.results as  Repo[] || []) 
     // );
