@@ -4,9 +4,7 @@ import *  as moment from 'moment';
 import { Repo } from '../repo/types/repo.types';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
 // import {map} from 'rxjs';
-
 // Import rxjs modules
 // 'rxjs/add/observable/of'
 // import 'rxjs/add/observable/of';
@@ -53,7 +51,8 @@ export class GithubApiService {
   }
 // Get User
 getUser(login: string): Observable<User> {
-  return this.http.get<User>(`${this.configurationURL}/user/${login}`);
+  console.log(` getUser(): ${this.configurationURL}users/${login}`)
+  return this.http.get<User>(`${this.configurationURL}users/${login}`);
 
 }
 
