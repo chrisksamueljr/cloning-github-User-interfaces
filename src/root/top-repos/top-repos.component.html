@@ -1,33 +1,15 @@
-<h2>Get Popular Repositories</h2>
-<hr>
-<!-- <div [(ngModel)]="dayInterval" (ngModelChange)="loadRepos()" ngbRadioGroup name="radioBasic" class="mb-2">
-
-  <label class="btn btn-primary">
-    <input type="radio" [value]="1"> Day
-  </label>
-
-  <label class="btn btn-primary">
-    <input type="radio" [value]="7"> Week
-  </label>
-
-  <label class="btn btn-primary">
-    <input type="radio" [value]="30"> Month
-  </label>
-</div> -->
-
-
-<h2>Top New Repositories</h2>
+<h2>Top Popular Repositories</h2>
 <hr>
 <div [(ngModel)]="dayInterval" (ngModelChange)="loadRepos()" ngbRadioGroup name="radioBasic" class="mb-2">
-  <!-- <label class="btn btn-primary">
-    <input type="radio" [value]="1"> Day
+  <label ngbButtonLabel  class="btn btn-primary">
+    <input ngbButton type="radio" [value]="1"> Day
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" [value]="7"> Week
+  <label ngbButtonLabel class="btn btn-primary">
+    <input ngbButton  type="radio" [value]="7"> Week
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" [value]="30"> Month
-  </label> -->
+  <label ngbButtonLabel class="btn btn-primary">
+    <input ngbButton type="radio" [value]="30"> Month
+  </label>
 </div>
 <!-- <pre>{{repo.items | json }}</pre> -->
 <div *ngIf="repo.items">
@@ -47,23 +29,23 @@
           {{r.language}}
         </li>
         <li *ngIf="r.stargazers_count" class="list-inline-item">
-          <i class="fa fa-star fa-fw" aria-hidden="true"></i> {{r.stargazers_count | largeNumberShorten}}
+          <i class="fa fa-star fa-fw" aria-hidden="true"></i> {{r.stargazers_count  }}
         </li>
       </ul>
-      <!-- <ul class="list-inline text-muted">
-        <li *ngIf="repo.language" class="list-inline-item">
-          {{repo.language}}
+      <ul class="list-inline text-muted">
+        <li *ngIf="r.language" class="list-inline-item">
+          {{r.language}}
         </li>
-        <li *ngIf="repo.stargazers_count" class="list-inline-item">
-          <i class="fa fa-star fa-fw" aria-hidden="true"></i> {{repo.stargazers_count | largeNumberShorten}}
+        <li *ngIf="r.stargazers_count" class="list-inline-item">
+          <i class="fa fa-star fa-fw" aria-hidden="true"></i> {{r.stargazers_count }}
         </li>
-        <li *ngIf="repo.forks_count" class="list-inline-item">
-          <i class="fa fa-code-fork fa-fw" aria-hidden="true"></i> {{repo.forks_count | largeNumberShorten}}
+        <li *ngIf="r.forks_count" class="list-inline-item">
+          <i class="fa fa-code-fork fa-fw" aria-hidden="true"></i> {{r.forks_count }}
         </li>
         <li class="list-inline-item">
-          Updated on {{repo.updated_at | date: 'MMM d, yyyy'}}
+          Updated on {{r.updated_at | date: 'MMM d, yyyy'}}
         </li>
-      </ul> -->
+      </ul>
     </div>
   </div>
   <hr>

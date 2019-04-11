@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Repo } from '../repo/types/repo.types';
-
+import {LargeNumberShortenPipe} from  '../shared/large-number-shorten.pipe';
 import { GithubApiService } from '../core/github-api.service';
 @Component({
   selector: 'top-repos',

@@ -30,8 +30,10 @@ const htttpOptions = {
 export class GithubApiService {
 
 
-  private configurationURL = 'https://api.github.com';
-  popularRepoUrl = `https://api.github.com/search/repositories?q=created:`;
+  private configurationURL = 'https://api.github.com/';
+  private popularRepoUrl = `search/repositories?q=created:`;
+  
+
   private headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   
   constructor(private http: HttpClient) { }
@@ -45,8 +47,10 @@ export class GithubApiService {
     let formattedDate = moment(from).utc().format('YYYY-MM-DD');
     // let params = new HttpParams();
     // params = params.set('HttpParams', formattedDate);
-    console.log(`${this.popularRepoUrl}${formattedDate}&sort=stars`);
-    return this.http.get<Repo[]>(`${this.popularRepoUrl}${formattedDate}&sort=stars`);
+    console.log(` ServiceUrl built below:
+    ${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars
+    `);
+    return this.http.get<Repo[]>(`${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars`);
     // .pipe(
     //   map(res => res.results as  Repo[] || []) 
     // );
@@ -55,4 +59,11 @@ export class GithubApiService {
     // .then(response)
     // .catch(this.handleError);    
   }
+
+searchRepos(query: string): Observable<Repo> {
+//  return this.http.get(`${this.configurationURL}${}`)
+return
+}
+
+
 }

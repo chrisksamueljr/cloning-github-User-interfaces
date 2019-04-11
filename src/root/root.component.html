@@ -11,5 +11,13 @@
    
   </mat-toolbar-row>
 
+<mat-toolbar-row>
+  <form class="form-inline float-xs-left">
+  <input name="search" placeholder="Search repos" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
+      (selectItem)="navigateToRepo($event)" />
+  </form>
+</mat-toolbar-row>
+ 
 </mat-toolbar>
+
 <top-repos></top-repos>

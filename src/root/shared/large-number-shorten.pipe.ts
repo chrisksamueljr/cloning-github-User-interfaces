@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class LargeNumberShortenPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    return null;
+  transform(num: number, digits = 1): string {
+    return num.toString();
   }
 
 }
