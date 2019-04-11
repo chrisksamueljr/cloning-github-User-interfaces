@@ -4,7 +4,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { RootComponent } from './root.component';
-import { UserComponent } from './user/user.component';
+
+
 import { RepoComponent } from './repo/repo.component';
 import { TopReposComponent } from './top-repos/top-repos.component';
 
@@ -20,7 +21,6 @@ import { RootRoutingModule } from './root-routing.module';
 @NgModule({
   declarations: [
     RootComponent,
-    UserComponent,
     RepoComponent,
     TopReposComponent,
 
