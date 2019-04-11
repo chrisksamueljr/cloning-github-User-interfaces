@@ -7,14 +7,14 @@ import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
-    path: 'login', component: UserComponent,
+    path: ':login', component: UserComponent,
     children: [] 
   }
 ];
 
 
 @NgModule({
-  declarations: [],
+  declarations: [UserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
