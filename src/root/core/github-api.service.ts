@@ -17,11 +17,9 @@ import {catchError} from  'rxjs/operators';
 import  { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/catch';
 
-interface ResponseOrders {
-  repo: Repo[];
-}
+import { User } from '../user/user.types';
 
-const htttpOptions = {
+const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
 @Injectable({
@@ -32,7 +30,7 @@ export class GithubApiService {
 
   private configurationURL = 'https://api.github.com/';
   private popularRepoUrl = `search/repositories?q=created:`;
-  private 
+  
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   
@@ -51,15 +49,15 @@ export class GithubApiService {
     ${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars
     `);
     return this.http.get<Repo[]>(`${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars`);
-    // .pipe(
-    //   map(res => res.results as  Repo[] || []) 
-    // );
- 
-    // .toPromise()
-    // .then(response)
-    // .catch(this.handleError);    
+   
   }
+// Get User
+getUser(login: string): Observable<User> {
+  return this.http.get<User>(`${this.configurationURL}/user/${login}`);
 
+}
+
+// searchRepos   
 searchRepos(query: string): Observable<Repo[]> {
   console.log(`Calling the searchRepos method`)
  return this.http.get<Repo[]>(`${this.configurationURL}/search/repositories?q=${query}`);
