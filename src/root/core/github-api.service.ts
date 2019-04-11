@@ -32,7 +32,7 @@ export class GithubApiService {
 
   private configurationURL = 'https://api.github.com/';
   private popularRepoUrl = `search/repositories?q=created:`;
-  
+  private 
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   
@@ -60,9 +60,9 @@ export class GithubApiService {
     // .catch(this.handleError);    
   }
 
-searchRepos(query: string): Observable<Repo> {
-//  return this.http.get(`${this.configurationURL}${}`)
-return
+searchRepos(query: string): Observable<Repo[]> {
+  console.log(`Calling the searchRepos method`)
+ return this.http.get<Repo[]>(`${this.configurationURL}/search/repositories?q=${query}`);
 }
 
 

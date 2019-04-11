@@ -1,3 +1,7 @@
-<p>
-  repository-search-input works!
-</p>
+<form class="form-inline float-xs-left">
+  <input name="search" 
+         placeholder="Search repos" 
+         type="text" 
+         (input)="term$.next($event.target.value)"
+  />
+</form>
