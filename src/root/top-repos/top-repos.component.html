@@ -1,13 +1,14 @@
 <div style="text-align:center">
-    <h2>Top Popular Repositories</h2>
-  </div>
-  <hr>
-<div [(ngModel)]="dayInterval" (ngModelChange)="loadRepos()" ngbRadioGroup name="radioBasic" class="mb-2">
-  <label ngbButtonLabel  class="btn btn-primary">
+  <h2>Top Popular Repositories</h2>
+</div>
+<hr>
+<div style="text-align:center" [(ngModel)]="dayInterval" (ngModelChange)="loadRepos()" ngbRadioGroup name="radioBasic"
+  class="mb-2">
+  <label ngbButtonLabel class="btn btn-primary">
     <input ngbButton type="radio" [value]="1"> Day
   </label>
   <label ngbButtonLabel class="btn btn-primary">
-    <input ngbButton  type="radio" [value]="7"> Week
+    <input ngbButton type="radio" [value]="7"> Week
   </label>
   <label ngbButtonLabel class="btn btn-primary">
     <input ngbButton type="radio" [value]="30"> Month
@@ -25,7 +26,7 @@
           {{r.full_name}}
         </a>
       </h4>
-      {{r.description}} 
+      {{r.description}}
       <ul class="list-inline text-muted">
         <li *ngIf="r.language" class="list-inline-item">
           {{r.language}}
@@ -51,5 +52,6 @@
     </div>
   </div>
   <hr>
-  Debug: <pre></pre>
-<!-- </div> -->
+  Debug:
+  <pre></pre>
+  <!-- </div> -->

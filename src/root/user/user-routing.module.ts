@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { UserComponent } from './user.component';
-
+import { UserEventsComponent } from './user-events/user-events.component';
 const routes: Routes = [
   {
     path: ':login', component: UserComponent,
-    children: [] 
+    children: [
+      {path: '', component: UserEventsComponent}
+  ] 
   }
 ];
 
