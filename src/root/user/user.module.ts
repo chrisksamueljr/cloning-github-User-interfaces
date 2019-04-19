@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-// import { UserComponent } from './user.component';
+import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserReposComponent } from './user-repos/user-repos.component';
 import { UserEventsComponent } from './user-events/user-events.component';
@@ -12,6 +12,7 @@ import { UserRecievedEventsComponent } from './user-recieved-events/user-recieve
 
 @NgModule({
   declarations: [
+    UserComponent,
     UserReposComponent, 
     UserEventsComponent, 
     UserCardViewComponent, 
