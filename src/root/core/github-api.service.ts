@@ -65,7 +65,7 @@ searchRepos(query: string): Observable<Repo[]> {
 
 // List public User Events performed by a user
 getUserEvents(login: string, page = 1, perPage: number): Observable<Event[]> {
-  console.log(`${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`)
+  console.log(` getUserEvents(): URL ${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`)
   return this.http.get<Event[]>(`${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`);   
 }
 
