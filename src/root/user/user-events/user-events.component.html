@@ -1,3 +1,21 @@
-<p>
-  user-events works!
-</p>
+{{ userEvents[0] | json}}
+<div *ngIf="userEvents">
+  <ul class="mt-2 list-unstyled">
+    <li *ngFor="let userEvent of userEvents">
+        <!-- <event-card-view [userEvent]="userEvent"></event-card-view> -->
+      <!-- <p>This is the space for the user event card view</p> -->
+      <!-- <event-card-view [userEvent]="userEvent"></event-card-view> -->
+      <!-- <event-card-view></event-card-view> -->
+    </li>
+  </ul>
+  <p *ngIf="userEvents.length==0">
+    No User Event to list! 
+  </p>
+  <!-- <nav aria-label="Page navigation" class="text-xs-center mt-2 mb-2">
+    <div class="btn-group" data-toggle="buttons">
+      <button [disabled]="loadButtonDisabled" (click)="loadMore()" type="button" class="btn page-link">Load more</button>
+    </div>
+  </nav> -->
+</div>
+
+
