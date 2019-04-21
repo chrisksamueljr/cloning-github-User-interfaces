@@ -17,13 +17,15 @@ export class UserComponent implements OnInit {
 
   constructor(
     private ghas: GithubApiService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private location: Location
   ) { }
 
   ngOnInit() {
-    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUser(params['login'])))
-    .subscribe(user => this.user = user);
+    
+    this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+    // this.route.params.pipe(switchMap((params: Params) => this.ghas.getUser(params['login'])))
+    // .subscribe(user => this.user = user);
   }
 
 }
