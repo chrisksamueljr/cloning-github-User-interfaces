@@ -19,6 +19,7 @@ import { User } from '../user/user.types';
 import { Event } from '../user/user-events/user-events.types';
 import { Repo } from '../repo/types/repo.types';
 import { EventType } from '../user/user-events/user-events.types';
+import { RepoComponent } from '../repo/repo.component';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -89,6 +90,11 @@ export class GithubApiService {
   getUserFollowing(login: string, page = 1, perPage: number): Observable<User[]> {
     console.log(`${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
     return this.http.get<User[]>(`${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
+  }
+
+  getUserRepos(login: string, page = 1, perPage: number): Observable<Repo[]> {
+    console.log(` Calling the getUserRepos service function`);
+    return this.http.get<Repo[]>(`${this.configurationURL}`)
   }
 
 }
