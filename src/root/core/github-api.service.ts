@@ -93,8 +93,8 @@ export class GithubApiService {
   }
 
   getUserRepos(login: string, page = 1, perPage: number): Observable<Repo[]> {
-    console.log(` Calling the getUserRepos service function`);
-    return this.http.get<Repo[]>(`${this.configurationURL}`)
+    console.log(`getUserRepos(): ${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`);
+    return this.http.get<Repo[]>(`${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`)
   }
 
 }
