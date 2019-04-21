@@ -26,7 +26,8 @@ export class UserEventsComponent implements OnInit {
 
   loadUserEvents() {
     this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserEvents(params['login'],this.page, this.perPage)))
-    .subscribe(events => this.events = events);
+    // .subscribe(events => this.events = events);
+    .subscribe(followers => console.log( `logged Subscribed value`,followers) );
   }
 
   ngOnInit() {
