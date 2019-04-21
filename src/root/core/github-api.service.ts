@@ -62,9 +62,9 @@ export class GithubApiService {
 
 
   // Get Repo
-  getRepo(login: string): Observable<Repo> {
+  getRepo(login: string): Observable<Repo[]> {
     console.log(`getUser(): ${this.configurationURL}users/${login}`)
-    return this.http.get<Repo>(`${this.configurationURL}users/${login}`);
+    return this.http.get<Repo[]>(`${this.configurationURL}users/${login}`);
   }
 
   // searchRepos   
