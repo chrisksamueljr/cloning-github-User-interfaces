@@ -60,6 +60,13 @@ export class GithubApiService {
 
   }
 
+
+  // Get Repo
+  getRepo(login: string): Observable<Repo> {
+    console.log(` getUser(): ${this.configurationURL}users/${login}`)
+    return this.http.get<Repo>(`${this.configurationURL}users/${login}`);
+  }
+
   // searchRepos   
   searchRepos(query: string): Observable<Repo[]> {
     return this.http.get<Repo[]>(`${this.configurationURL}/search/repositories?q=${query}`);
@@ -91,8 +98,21 @@ export class GithubApiService {
     console.log(`${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
     return this.http.get<User[]>(`${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
   }
-
+ 
+  // Get the User's Repo
   getUserRepos(login: string, page = 1, perPage: number): Observable<Repo[]> {
+    console.log(`getUserRepos(): ${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`);
+    return this.http.get<Repo[]>(`${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`)
+  }
+
+  // Get Repository Readme file
+  getRepoReadme(login: string, page = 1, perPage: number): Observable<Repo[]> {
+    console.log(`getUserRepos(): ${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`);
+    return this.http.get<Repo[]>(`${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`)
+  }
+
+  // Get Repo Events
+  getRepoEvents(login: string, page = 1, perPage: number): Observable<Repo[]> {
     console.log(`getUserRepos(): ${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`);
     return this.http.get<Repo[]>(`${this.configurationURL}users/${login}/repos?page=${page}&per_page=${perPage}&sort=updated`)
   }
