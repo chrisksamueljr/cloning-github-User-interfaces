@@ -17,12 +17,16 @@ import { SharedModule } from './shared/shared.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RootRoutingModule } from './root-routing.module';
+import { RepoReadmeComponent } from './repo/repo-readme/repo-readme.component';
+import { RepoEventsComponent } from './repo/repo-events/repo-events.component';
 
 @NgModule({
   declarations: [
     RootComponent,
     RepoComponent,
     TopReposComponent,
+    RepoReadmeComponent,
+    RepoEventsComponent,
 
   ],
   imports: [
