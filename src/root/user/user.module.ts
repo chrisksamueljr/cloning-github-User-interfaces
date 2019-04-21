@@ -9,6 +9,7 @@ import { UserCardViewComponent } from './shared/user-card-view/user-card-view.co
 import { UserFollowingComponent } from './user-following/user-following.component';
 import { UserFollowersComponent } from './user-followers/user-followers.component';
 import { UserRecievedEventsComponent } from './user-recieved-events/user-recieved-events.component';
+import { EventCardViewComponent } from './event-card-view/event-card-view.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserRecievedEventsComponent } from './user-recieved-events/user-recieve
     UserCardViewComponent, 
     UserFollowingComponent, 
     UserFollowersComponent, 
-    UserRecievedEventsComponent
+    UserRecievedEventsComponent,
+    EventCardViewComponent
   ],
   imports: [
     CommonModule,
