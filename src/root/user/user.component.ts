@@ -21,11 +21,28 @@ export class UserComponent implements OnInit {
     private location: Location
   ) { }
 
+
+  logUserEventsToConsole() {
+    this.activatedRoute.params.pipe(switchMap((params: Params) => this.ghas.getUser(params['login'])))
+    .subscribe(
+      user => console.log(`logUserEventsToConsole(): `,user));
+  }
+
+  loadUserEvents() {
+      // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+      this.activatedRoute.params.pipe(switchMap((params: Params) => this.ghas.getUser(params['login'])))
+      .subscribe(
+        user => 
+        // console.log(user)
+        this.user = user
+        
+        );
+  }
+  
+
   ngOnInit() {
-    
-    this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
-    // this.route.params.pipe(switchMap((params: Params) => this.ghas.getUser(params['login'])))
-    // .subscribe(user => this.user = user);
+    this.loadUserEvents();
+    this.logUserEventsToConsole();
   }
 
 }

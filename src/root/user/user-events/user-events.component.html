@@ -2,26 +2,12 @@
 <div *ngIf="events">
   <ul class="mt-2 list-unstyled">
     <li *ngFor="let event of events">
-        <!-- <event-card-view [event]="event"></event-card-view> -->
-        <div *ngIf="event.type=='WatchEvent'">
-          <i class="fa fa-star fa-fw text-muted" aria-hidden="true"></i>
-          <a [routerLink]="['/user', event.actor.login]">{{event.actor.login}} </a> starred
-          <a [routerLink]="'/repo/' + event.repo.name">{{event.repo.name}}</a>
-          <small class="text-muted">{{ event.created_at  }}</small>
-          <hr>
-        </div>
-      <!-- <event-card-view [userEvent]="userEvent"></event-card-view> -->
-      <!-- <event-card-view></event-card-view> -->
+        <event-card-view [event]="event"></event-card-view>
     </li>
   </ul>
   <p *ngIf="events.length==0">
     No User Event to list! 
   </p>
-  <!-- <nav aria-label="Page navigation" class="text-xs-center mt-2 mb-2">
-    <div class="btn-group" data-toggle="buttons">
-      <button [disabled]="loadButtonDisabled" (click)="loadMore()" type="button" class="btn page-link">Load more</button>
-    </div>
-  </nav> -->
 </div>
 
 

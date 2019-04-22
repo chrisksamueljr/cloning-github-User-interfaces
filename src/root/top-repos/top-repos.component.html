@@ -15,7 +15,7 @@
   </label>
 </div>
 <!-- <pre>{{repo.items | json }}</pre> -->
-<div *ngIf="repo.items">
+ <div *ngIf="repo.items">
   <div *ngFor="let r of repo.items;" class="media">
     <a class="media-left" [routerLink]="['/user', r.owner.login]">
       <img class="media-object" [src]="r.owner.avatar_url" alt height="64" width="64">
@@ -54,4 +54,4 @@
   <hr>
   Debug:
   <pre></pre>
-  <!-- </div> -->
+  </div>

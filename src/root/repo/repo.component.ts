@@ -35,12 +35,12 @@ export class RepoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
-    
-    // this.route.params.pipe(switchMap((params: Params) => 
-    // // console.log(params)
-    // this.ghas.getRepo(params['login'])))
-    // .subscribe(repos => this.repos = repos);
+    // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+    this.activatedRoute.params.pipe(switchMap((params: Params) => 
+    // console.log(params)
+    this.ghas.getRepo(params['login'])))
+    .subscribe(repos => console.log(repos));
+  
   }
 
   

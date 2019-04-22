@@ -16,6 +16,7 @@ export class UserEventsComponent implements OnInit {
   events: Event[] = [];
   page = 1;
   perPage = 20;
+  logToConsole: Event[];
   
   loadButtonDisabled = false;
   constructor(
@@ -26,13 +27,19 @@ export class UserEventsComponent implements OnInit {
 
   loadUserEvents() {
     this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserEvents(params['login'],this.page, this.perPage)))
+    .subscribe(events => this.events = events);
+    }
+
+  logFollowers() {
+    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserEvents(params['login'],this.page, this.perPage)))
     // .subscribe(events => this.events = events);
-    .subscribe(followers => console.log( `logged Subscribed value`,followers) );
+    .subscribe(events => console.log( `logged Subscribed value`,events) );
   }
+
 
   ngOnInit() {
     this.loadUserEvents();
-    // console.log(this.userEvent);
+    this.logFollowers();
   }
 
 }
