@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { GithubApiService } from '../../core/github-api.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Observable, combineLatest } from 'rxjs';
-// import 'rxjs/add/observable/combineLatest';
-// import 'rxjs/add/operator/switchMap';
-import { User } from '../user.types';
-import { GithubApiService } from '../../core/github-api.service';
 import { switchMap } from 'rxjs/operators';
+import { Event } from '../user-events/user-events.types';
+import { User } from '../user.types';
+
+
 @Component({
   selector: 'user-followers',
   templateUrl: './user-followers.component.html',
@@ -15,9 +14,10 @@ import { switchMap } from 'rxjs/operators';
 })
 export class UserFollowersComponent implements OnInit {
 
-  followers: User[];
-  page: number;
-  perPage = 51;
+  theFollowers: User[];
+  page = 1;
+  perPage = 20;
+  loadButtonDisabled = false;
 
   constructor(
     private ghas: GithubApiService,
@@ -25,16 +25,26 @@ export class UserFollowersComponent implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit() {
-   combineLatest(this.route.parent.params, this.route.queryParams)
-    .pipe(switchMap(
-      ((ps: Params[]) => {
-  this.page = +ps[1]['page'] || 1;
-  return this.ghas.getUserFollowers(ps[0]['login'], this.page, this.perPage)
-})
-    )).subscribe(followers => console.log( `logged Subscribed value`,followers) );
+
+  // get the User Following Events
+  logOutTheUserFollowersEvents() {
+    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowers(params['login'],this.page, this.perPage)))
+    // .subscribe(events => this.events = events);
+    .subscribe(theFollowers => console.log( `logged Subscribed value`,theFollowers) );
   }
 
-}
+  loadUserFollowers() {
+this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowers(params['login'],this.page, this.perPage)))
+    .subscribe(theFollowers => this.theFollowers = theFollowers);
+    // .subscribe(theFollowers => console.log( `logged Subscribed value`,theFollowers) );    
+  }
 
+  ngOnInit() {
+    this.loadUserFollowers();
+    this.logOutTheUserFollowersEvents();
+  }
 
+  loadMore() {
+    this.page++;
+    this.loadUserFollowers();
+  }}

@@ -35,15 +35,31 @@ export class UserReposComponent implements OnInit {
 
 
 // Grab this user's Repos
- 
-ngOnInit() {
+loadUserRepositories() {
   combineLatest(this.route.parent.params, this.route.queryParams)
    .pipe(switchMap(
      ((ps: Params[]) => {
  this.page = +ps[1]['page'] || 1;
  return this.ghas.getUserRepos(ps[0]['login'], this.page, this.perPage)
 })
-   )).subscribe(followers => console.log( `logged Subscribed value`,followers) );
+   )).subscribe(repos => this.repos = repos);
+ };
+
+
+logUserReposToConsole() {
+    combineLatest(this.route.parent.params, this.route.queryParams)
+   .pipe(switchMap(
+     ((ps: Params[]) => {
+ this.page = +ps[1]['page'] || 1;
+ return this.ghas.getUserRepos(ps[0]['login'], this.page, this.perPage)
+})
+   )).subscribe(repos => console.log( `logged Subscribed value`, repos) );
  }
+
+ 
+ngOnInit() {
+  this.loadUserRepositories();
+
+}
 
 }

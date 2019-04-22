@@ -89,14 +89,15 @@ export class GithubApiService {
 
   // getUserFollowers 
   getUserFollowers(login: string, page = 1, perPage: number): Observable<User[]> {
-    console.log(`getUserFollowers(): ${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
-    return this.http.get<User[]>(`${this.configurationURL}users/${login}/following?page=${page}&per_page=${perPage}`)
+    console.log(`getUserFollowers(): ${this.configurationURL}users/${login}/followers?page=${page}&per_page=${perPage}`)
+                               // ${this.configurationURL}users/${login}/followers?page=${page}&per_page=${perPage}   
+    return this.http.get<User[]>(`${this.configurationURL}users/${login}/followers?page=${page}&per_page=${perPage}`)
   }
 
   // Get the User's Following
   getUserFollowing(login: string, page = 1, perPage: number): Observable<User[]> {
-    console.log(`getUserFollowing(): ${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
-    return this.http.get<User[]>(`${this.configurationURL}/users/${login}/following?page=${page}&per_page=${perPage}`)
+    console.log(`getUserFollowing(): ${this.configurationURL}users/${login}/following?page=${page}&per_page=${perPage}`)
+       return this.http.get<User[]>(`${this.configurationURL}users/${login}/following?page=${page}&per_page=${perPage}`)
   }
  
   // Get the User's Repo

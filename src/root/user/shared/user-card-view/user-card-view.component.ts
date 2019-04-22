@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { User } from '../../user.types';
 
 @Component({
   selector: 'user-card-view',
   templateUrl: './user-card-view.component.html',
   styleUrls: ['./user-card-view.component.css']
 })
-export class UserCardViewComponent implements OnInit {
+export class UserCardViewComponent  {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  @Input()
+  user: User;
 }

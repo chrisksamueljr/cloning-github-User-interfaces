@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { Event } from '../user-events/user-events.types';
-
+import { User } from '../user.types';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Event } from '../user-events/user-events.types';
 })
 export class UserFollowingComponent implements OnInit {
 
-  events: Event[] = [];
+  theFollowing: User[];
   page = 1;
   perPage = 20;
   loadButtonDisabled = false;
@@ -26,18 +26,25 @@ export class UserFollowingComponent implements OnInit {
   ) { }
 
 
-  // getUserRecievedEvents
-  loadEvents() {
-    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserRecievedEvents(params['login'],this.page, this.perPage)))
+  // get the User Following Events
+  logOutTheUserFollowingEvents() {
+    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowing(params['login'],this.page, this.perPage)))
     // .subscribe(events => this.events = events);
-    .subscribe(followers => console.log( `logged Subscribed value`,followers) );
+    .subscribe(theFollowing => console.log( `logged Subscribed value`,theFollowing) );
+  }
+
+  loadUserFollowing() {
+this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowing(params['login'],this.page, this.perPage)))
+    .subscribe(theFollowing => this.theFollowing = theFollowing);
+    // .subscribe(theFollowing => console.log( `logged Subscribed value`,theFollowing) );    
   }
 
   ngOnInit() {
-    this.loadEvents();
+    this.loadUserFollowing();
+    this.logOutTheUserFollowingEvents();
   }
 
   loadMore() {
     this.page++;
-    this.loadEvents();
+    this.loadUserFollowing();
   }}
