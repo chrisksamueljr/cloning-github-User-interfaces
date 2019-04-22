@@ -26,6 +26,13 @@ export class UserRecievedEventsComponent implements OnInit {
   // getUserRecievedEvents
   loadEvents() {
     this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserRecievedEvents(params['login'],this.page, this.perPage)))
+    .subscribe(events => this.events = events);
+    // .subscribe(followers => console.log( `logged Subscribed value`,followers) );
+  }
+
+    // Log The User Recieved Events
+   logUserRecievedEvents() {
+    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserRecievedEvents(params['login'],this.page, this.perPage)))
     // .subscribe(events => this.events = events);
     .subscribe(followers => console.log( `logged Subscribed value`,followers) );
   }

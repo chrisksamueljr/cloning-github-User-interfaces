@@ -1,8 +1,8 @@
 <div *ngIf="events">
   <ul class="mt-2 list-unstyled">
     <li *ngFor="let event of events">
-       Placeholder for each Event in the User Recieved Events Service
-      <!-- <app-event-card-view [event]="event"></app-event-card-view> -->
+       <!-- Placeholder for each Event in the User Recieved Events Service -->
+      <event-card-view [event]="event"></event-card-view>
     </li>
   </ul>
   <p *ngIf="events.length==0">
@@ -13,4 +13,8 @@
       <button [disabled]="loadButtonDisabled" (click)="loadMore()" type="button" class="btn page-link">Load more</button>
     </div>
   </nav>
-</div>%
+</div>
+
+<!-- <pre> -->
+<!-- {{ events | json}} -->
+<!-- </pre> -->
