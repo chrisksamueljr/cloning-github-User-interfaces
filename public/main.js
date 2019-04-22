@@ -295,6 +295,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./repo/repo.module": [
+		"./src/root/repo/repo.module.ts",
+		"repo-repo-module"
+	],
 	"./user/user.module": [
 		"./src/root/user/user.module.ts",
 		"user-user-module"
@@ -396,17 +400,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CoreModule = /** @class */ (function () {
-    function CoreModule() {
+    function CoreModule(parentModule) {
+        if (parentModule) {
+            throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+        }
     }
     CoreModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]],
             declarations: [],
-            imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]
-            ],
-            providers: [_github_api_service__WEBPACK_IMPORTED_MODULE_3__["GithubApiService"]],
-            exports: []
-        })
+            exports: [],
+            providers: [_github_api_service__WEBPACK_IMPORTED_MODULE_3__["GithubApiService"]]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"])()), tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["SkipSelf"])()),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [CoreModule])
     ], CoreModule);
     return CoreModule;
 }());
@@ -460,10 +467,55 @@ var GithubApiService = /** @class */ (function () {
         console.log(" getUser(): " + this.configurationURL + "users/" + login);
         return this.http.get(this.configurationURL + "users/" + login);
     };
+    // Get Repo
+    GithubApiService.prototype.getRepo = function (login) {
+        console.log("getUser(): " + this.configurationURL + "users/" + login);
+        return this.http.get(this.configurationURL + "users/" + login);
+    };
     // searchRepos   
     GithubApiService.prototype.searchRepos = function (query) {
-        console.log("Calling the searchRepos method");
-        return this.http.get(this.configurationURL + "/search/repositories?q=" + query);
+        return this.http.get("searchRepos(): " + this.configurationURL + "/search/repositories?q=" + query);
+    };
+    // List public User Events performed by a user
+    GithubApiService.prototype.getUserEvents = function (login, page, perPage) {
+        if (page === void 0) { page = 1; }
+        console.log(" getUserEvents(): URL " + this.configurationURL + "users/" + login + "/events?page=" + page + "&per_page=" + perPage + "&sort=updated");
+        return this.http.get(this.configurationURL + "users/" + login + "/events?page=" + page + "&per_page=" + perPage + "&sort=updated");
+    };
+    // User Recieved Events
+    GithubApiService.prototype.getUserRecievedEvents = function (login, page, perPage) {
+        if (page === void 0) { page = 1; }
+        console.log(" getUserRecievedEvents(): " + this.configurationURL + "/users/" + login + "/received_events?page=" + page + "&per_page=" + perPage + "&sort=updated");
+        return this.http.get(this.configurationURL + "users/" + login + "/received_events?page=" + page + "&per_page=" + perPage + "&sort=updated");
+    };
+    // getUserFollowers 
+    GithubApiService.prototype.getUserFollowers = function (login, page, perPage) {
+        if (page === void 0) { page = 1; }
+        console.log("getUserFollowers(): " + this.configurationURL + "/users/" + login + "/following?page=" + page + "&per_page=" + perPage);
+        return this.http.get(this.configurationURL + "users/" + login + "/following?page=" + page + "&per_page=" + perPage);
+    };
+    // Get the User's Following
+    GithubApiService.prototype.getUserFollowing = function (login, page, perPage) {
+        if (page === void 0) { page = 1; }
+        console.log("getUserFollowing(): " + this.configurationURL + "/users/" + login + "/following?page=" + page + "&per_page=" + perPage);
+        return this.http.get(this.configurationURL + "/users/" + login + "/following?page=" + page + "&per_page=" + perPage);
+    };
+    // Get the User's Repo
+    GithubApiService.prototype.getUserRepos = function (login, page, perPage) {
+        if (page === void 0) { page = 1; }
+        console.log("getUserRepos(): " + this.configurationURL + "users/" + login + "/repos?page=" + page + "&per_page=" + perPage + "&sort=updated");
+        return this.http.get(this.configurationURL + "users/" + login + "/repos?page=" + page + "&per_page=" + perPage + "&sort=updated");
+    };
+    // Get Repository Readme file
+    GithubApiService.prototype.getRepoReadme = function (owner, repoName) {
+        console.log("getRepoReadme(): " + this.configurationURL + "repos/" + owner + "/" + repoName + "/readme");
+        return this.http.get(this.configurationURL + "repos/" + owner + "/" + repoName + "/readme");
+    };
+    // Get Repo Events
+    GithubApiService.prototype.getRepoEvents = function (owner, repoName, page, perPage) {
+        if (page === void 0) { page = 1; }
+        console.log("getRepoEvents(): " + this.configurationURL + "/repos/" + owner + "/" + repoName + "/events?page=" + page + "&per_page=" + perPage);
+        return this.http.get(this.configurationURL + "/repos/" + owner + "/" + repoName + "/events?page=" + page + "&per_page=" + perPage);
     };
     GithubApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -478,6 +530,150 @@ var GithubApiService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/root/repo/repo-events/repo-events.component.css":
+/*!*************************************************************!*\
+  !*** ./src/root/repo/repo-events/repo-events.component.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXBvLWV2ZW50cy9yZXBvLWV2ZW50cy5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/root/repo/repo-events/repo-events.component.html":
+/*!**************************************************************!*\
+  !*** ./src/root/repo/repo-events/repo-events.component.html ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  repo-events works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/root/repo/repo-events/repo-events.component.ts":
+/*!************************************************************!*\
+  !*** ./src/root/repo/repo-events/repo-events.component.ts ***!
+  \************************************************************/
+/*! exports provided: RepoEventsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepoEventsComponent", function() { return RepoEventsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _core_github_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/github-api.service */ "./src/root/core/github-api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
+
+
+
+
+var RepoEventsComponent = /** @class */ (function () {
+    function RepoEventsComponent(ghas, activatedRoute, location) {
+        this.ghas = ghas;
+        this.activatedRoute = activatedRoute;
+        this.location = location;
+        this.events = [];
+        this.page = 1;
+        this.perPage = 20;
+    }
+    RepoEventsComponent.prototype.ngOnInit = function () {
+        this.loadRepoEvents();
+    };
+    RepoEventsComponent.prototype.loadRepoEvents = function () {
+        var _this = this;
+        // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+        this.activatedRoute.params.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (params) { return _this.ghas.getUser(params['login']); }))
+            .subscribe(function (user) {
+            return console.log(user);
+        }
+        // this.user = user
+        );
+    };
+    // Load More Events
+    RepoEventsComponent.prototype.loadMore = function () {
+        this.page++;
+        this.loadRepoEvents();
+    };
+    RepoEventsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'repo-events',
+            template: __webpack_require__(/*! ./repo-events.component.html */ "./src/root/repo/repo-events/repo-events.component.html"),
+            styles: [__webpack_require__(/*! ./repo-events.component.css */ "./src/root/repo/repo-events/repo-events.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_core_github_api_service__WEBPACK_IMPORTED_MODULE_2__["GithubApiService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"]])
+    ], RepoEventsComponent);
+    return RepoEventsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/root/repo/repo-readme/repo-readme.component.css":
+/*!*************************************************************!*\
+  !*** ./src/root/repo/repo-readme/repo-readme.component.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXBvLXJlYWRtZS9yZXBvLXJlYWRtZS5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/root/repo/repo-readme/repo-readme.component.html":
+/*!**************************************************************!*\
+  !*** ./src/root/repo/repo-readme/repo-readme.component.html ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  repo-readme works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/root/repo/repo-readme/repo-readme.component.ts":
+/*!************************************************************!*\
+  !*** ./src/root/repo/repo-readme/repo-readme.component.ts ***!
+  \************************************************************/
+/*! exports provided: RepoReadmeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepoReadmeComponent", function() { return RepoReadmeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var RepoReadmeComponent = /** @class */ (function () {
+    function RepoReadmeComponent() {
+    }
+    RepoReadmeComponent.prototype.ngOnInit = function () {
+    };
+    RepoReadmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'repo-readme',
+            template: __webpack_require__(/*! ./repo-readme.component.html */ "./src/root/repo/repo-readme/repo-readme.component.html"),
+            styles: [__webpack_require__(/*! ./repo-readme.component.css */ "./src/root/repo/repo-readme/repo-readme.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], RepoReadmeComponent);
+    return RepoReadmeComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/root/repo/repo.component.css":
 /*!******************************************!*\
   !*** ./src/root/repo/repo.component.css ***!
@@ -485,7 +681,7 @@ var GithubApiService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvcm9vdC9yZXBvL3JlcG8uY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXBvLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -512,12 +708,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepoComponent", function() { return RepoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _core_github_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/github-api.service */ "./src/root/core/github-api.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 
+// Angular Modules 
+
+
+
+// Github Service using the HTTP Service
+
+// RxJS Operators and Functions
 
 var RepoComponent = /** @class */ (function () {
-    function RepoComponent() {
+    // page: number;
+    // perPage = 51;
+    function RepoComponent(ghas, activatedRoute, location) {
+        this.ghas = ghas;
+        this.activatedRoute = activatedRoute;
+        this.location = location;
     }
     RepoComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+        this.activatedRoute.params.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (params) {
+            // console.log(params)
+            return _this.ghas.getRepo(params['login']);
+        }))
+            .subscribe(function (repos) { return console.log(repos); });
     };
     RepoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -525,7 +744,9 @@ var RepoComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./repo.component.html */ "./src/root/repo/repo.component.html"),
             styles: [__webpack_require__(/*! ./repo.component.css */ "./src/root/repo/repo.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_core_github_api_service__WEBPACK_IMPORTED_MODULE_4__["GithubApiService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]])
     ], RepoComponent);
     return RepoComponent;
 }());
@@ -557,6 +778,7 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     { path: '', component: _top_repos_top_repos_component__WEBPACK_IMPORTED_MODULE_4__["TopReposComponent"] },
     { path: 'user', loadChildren: './user/user.module#UserModule' },
+    { path: 'repo', loadChildren: './repo/repo.module#RepoModule' }
 ];
 var RootRoutingModule = /** @class */ (function () {
     function RootRoutingModule() {
@@ -585,7 +807,7 @@ var RootRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n    background-color: #464345;\n    color: #fff;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9yb290L3Jvb3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHlCQUF5QjtJQUN6QixXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL3Jvb3Qvcm9vdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzQ2NDM0NTtcbiAgICBjb2xvcjogI2ZmZjtcbn0iXX0= */"
+module.exports = ".container {\n    background-color: #464345;\n    color: #fff;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3Jvb3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHlCQUF5QjtJQUN6QixXQUFXO0FBQ2YiLCJmaWxlIjoiLi4vcm9vdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzQ2NDM0NTtcbiAgICBjb2xvcjogI2ZmZjtcbn0iXX0= */"
 
 /***/ }),
 
@@ -656,6 +878,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/button-toggle */ "./node_modules/@angular/material/esm5/button-toggle.es5.js");
 /* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm5/toolbar.es5.js");
 /* harmony import */ var _root_routing_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./root-routing.module */ "./src/root/root-routing.module.ts");
+/* harmony import */ var _repo_repo_readme_repo_readme_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./repo/repo-readme/repo-readme.component */ "./src/root/repo/repo-readme/repo-readme.component.ts");
+/* harmony import */ var _repo_repo_events_repo_events_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./repo/repo-events/repo-events.component */ "./src/root/repo/repo-events/repo-events.component.ts");
+
+
 
 
 
@@ -679,6 +905,8 @@ var RootModule = /** @class */ (function () {
                 _root_component__WEBPACK_IMPORTED_MODULE_5__["RootComponent"],
                 _repo_repo_component__WEBPACK_IMPORTED_MODULE_6__["RepoComponent"],
                 _top_repos_top_repos_component__WEBPACK_IMPORTED_MODULE_7__["TopReposComponent"],
+                _repo_repo_readme_repo_readme_component__WEBPACK_IMPORTED_MODULE_14__["RepoReadmeComponent"],
+                _repo_repo_events_repo_events_component__WEBPACK_IMPORTED_MODULE_15__["RepoEventsComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -742,7 +970,7 @@ var LargeNumberShortenPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvcm9vdC9zaGFyZWQvcmVwb3NpdG9yeS1zZWFyY2gtaW5wdXQvcmVwb3NpdG9yeS1zZWFyY2gtaW5wdXQuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9zaGFyZWQvcmVwb3NpdG9yeS1zZWFyY2gtaW5wdXQvcmVwb3NpdG9yeS1zZWFyY2gtaW5wdXQuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -841,12 +1069,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { EventCardViewComponent } from './event-card-view/event-card-view.component';
 var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
     SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_large_number_shorten_pipe__WEBPACK_IMPORTED_MODULE_3__["LargeNumberShortenPipe"], _repository_search_input_repository_search_input_component__WEBPACK_IMPORTED_MODULE_4__["RepositorySearchInputComponent"]],
+            declarations: [_large_number_shorten_pipe__WEBPACK_IMPORTED_MODULE_3__["LargeNumberShortenPipe"],
+                _repository_search_input_repository_search_input_component__WEBPACK_IMPORTED_MODULE_4__["RepositorySearchInputComponent"],
+            ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]
             ]
@@ -866,7 +1097,7 @@ var SharedModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n    background-color: #464345;\n    color: #fff;\n}\n\nimg {\n    padding: 15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9yb290L3RvcC1yZXBvcy90b3AtcmVwb3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHlCQUF5QjtJQUN6QixXQUFXO0FBQ2Y7O0FBRUE7SUFDSSxhQUFhO0FBQ2pCIiwiZmlsZSI6InNyYy9yb290L3RvcC1yZXBvcy90b3AtcmVwb3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM0NjQzNDU7XG4gICAgY29sb3I6ICNmZmY7XG59XG5cbmltZyB7XG4gICAgcGFkZGluZzogMTVweDtcbn0iXX0= */"
+module.exports = ".container {\n    background-color: #464345;\n    color: #fff;\n}\n\nimg {\n    padding: 15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3RvcC1yZXBvcy90b3AtcmVwb3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHlCQUF5QjtJQUN6QixXQUFXO0FBQ2Y7O0FBRUE7SUFDSSxhQUFhO0FBQ2pCIiwiZmlsZSI6Ii4uL3RvcC1yZXBvcy90b3AtcmVwb3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM0NjQzNDU7XG4gICAgY29sb3I6ICNmZmY7XG59XG5cbmltZyB7XG4gICAgcGFkZGluZzogMTVweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -877,7 +1108,7 @@ module.exports = ".container {\n    background-color: #464345;\n    color: #fff;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <h2>Top Popular Repositories</h2>\n</div>\n<hr>\n<div style=\"text-align:center\" [(ngModel)]=\"dayInterval\" (ngModelChange)=\"loadRepos()\" ngbRadioGroup name=\"radioBasic\"\n  class=\"mb-2\">\n  <label ngbButtonLabel class=\"btn btn-primary\">\n    <input ngbButton type=\"radio\" [value]=\"1\"> Day\n  </label>\n  <label ngbButtonLabel class=\"btn btn-primary\">\n    <input ngbButton type=\"radio\" [value]=\"7\"> Week\n  </label>\n  <label ngbButtonLabel class=\"btn btn-primary\">\n    <input ngbButton type=\"radio\" [value]=\"30\"> Month\n  </label>\n</div>\n<!-- <pre>{{repo.items | json }}</pre> -->\n<div *ngIf=\"repo.items\">\n  <div *ngFor=\"let r of repo.items;\" class=\"media\">\n    <a class=\"media-left\" [routerLink]=\"['/user', r.owner.login]\">\n      <img class=\"media-object\" [src]=\"r.owner.avatar_url\" alt height=\"64\" width=\"64\">\n    </a>\n    <div class=\"media-body\">\n      <h4 class=\"media-heading\">\n        <a [routerLink]=\"['/repo', r.owner.login, r.name]\">\n          {{r.full_name}}\n        </a>\n      </h4>\n      {{r.description}}\n      <ul class=\"list-inline text-muted\">\n        <li *ngIf=\"r.language\" class=\"list-inline-item\">\n          {{r.language}}\n        </li>\n        <li *ngIf=\"r.stargazers_count\" class=\"list-inline-item\">\n          <i class=\"fa fa-star fa-fw\" aria-hidden=\"true\"></i> {{r.stargazers_count  }}\n        </li>\n      </ul>\n      <ul class=\"list-inline text-muted\">\n        <li *ngIf=\"r.language\" class=\"list-inline-item\">\n          {{r.language}}\n        </li>\n        <li *ngIf=\"r.stargazers_count\" class=\"list-inline-item\">\n          <i class=\"fa fa-star fa-fw\" aria-hidden=\"true\"></i> {{r.stargazers_count }}\n        </li>\n        <li *ngIf=\"r.forks_count\" class=\"list-inline-item\">\n          <i class=\"fa fa-code-fork fa-fw\" aria-hidden=\"true\"></i> {{r.forks_count }}\n        </li>\n        <li class=\"list-inline-item\">\n          Updated on {{r.updated_at | date: 'MMM d, yyyy'}}\n        </li>\n      </ul>\n    </div>\n  </div>\n  <hr>\n  Debug:\n  <pre></pre>\n  <!-- </div> -->"
+module.exports = "<div style=\"text-align:center\">\n  <h2>Top Popular Repositories</h2>\n</div>\n<hr>\n<div style=\"text-align:center\" [(ngModel)]=\"dayInterval\" (ngModelChange)=\"loadRepos()\" ngbRadioGroup name=\"radioBasic\"\n  class=\"mb-2\">\n  <label ngbButtonLabel class=\"btn btn-primary\">\n    <input ngbButton type=\"radio\" [value]=\"1\"> Day\n  </label>\n  <label ngbButtonLabel class=\"btn btn-primary\">\n    <input ngbButton type=\"radio\" [value]=\"7\"> Week\n  </label>\n  <label ngbButtonLabel class=\"btn btn-primary\">\n    <input ngbButton type=\"radio\" [value]=\"30\"> Month\n  </label>\n</div>\n<!-- <pre>{{repo.items | json }}</pre> -->\n <div *ngIf=\"repo.items\">\n  <div *ngFor=\"let r of repo.items;\" class=\"media\">\n    <a class=\"media-left\" [routerLink]=\"['/user', r.owner.login]\">\n      <img class=\"media-object\" [src]=\"r.owner.avatar_url\" alt height=\"64\" width=\"64\">\n    </a>\n    <div class=\"media-body\">\n      <h4 class=\"media-heading\">\n        <a [routerLink]=\"['/repo', r.owner.login, r.name]\">\n          {{r.full_name}}\n        </a>\n      </h4>\n      {{r.description}}\n      <ul class=\"list-inline text-muted\">\n        <li *ngIf=\"r.language\" class=\"list-inline-item\">\n          {{r.language}}\n        </li>\n        <li *ngIf=\"r.stargazers_count\" class=\"list-inline-item\">\n          <i class=\"fa fa-star fa-fw\" aria-hidden=\"true\"></i> {{r.stargazers_count  }}\n        </li>\n      </ul>\n      <ul class=\"list-inline text-muted\">\n        <li *ngIf=\"r.language\" class=\"list-inline-item\">\n          {{r.language}}\n        </li>\n        <li *ngIf=\"r.stargazers_count\" class=\"list-inline-item\">\n          <i class=\"fa fa-star fa-fw\" aria-hidden=\"true\"></i> {{r.stargazers_count }}\n        </li>\n        <li *ngIf=\"r.forks_count\" class=\"list-inline-item\">\n          <i class=\"fa fa-code-fork fa-fw\" aria-hidden=\"true\"></i> {{r.forks_count }}\n        </li>\n        <li class=\"list-inline-item\">\n          Updated on {{r.updated_at | date: 'MMM d, yyyy'}}\n        </li>\n      </ul>\n    </div>\n  </div>\n  <hr>\n  Debug:\n  <pre></pre>\n  </div>"
 
 /***/ }),
 
