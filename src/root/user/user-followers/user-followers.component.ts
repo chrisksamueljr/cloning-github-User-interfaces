@@ -30,7 +30,7 @@ export class UserFollowersComponent implements OnInit {
   logOutTheUserFollowersEvents() {
     this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowers(params['login'],this.page, this.perPage)))
     // .subscribe(events => this.events = events);
-    .subscribe(theFollowers => console.log( `logged Subscribed value`,theFollowers) );
+    .subscribe(theFollowers => console.log( `logOutTheUserFollowersEvents(): `,theFollowers) );
   }
 
   loadUserFollowers() {

@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { Event } from '../user-events/user-events.types';
 import { User } from '../user.types';
+import { combineLatest } from 'rxjs';
 
 
 @Component({
@@ -26,18 +27,29 @@ export class UserFollowingComponent implements OnInit {
   ) { }
 
 
-  // get the User Following Events
+  // log the User Following Events
   logOutTheUserFollowingEvents() {
-    this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowing(params['login'],this.page, this.perPage)))
-    // .subscribe(events => this.events = events);
-    .subscribe(theFollowing => console.log( `logged Subscribed value`,theFollowing) );
+   combineLatest(this.route.parent.params, this.route.queryParams)
+   .pipe(switchMap(
+     ((params: Params[]) => {
+ this.page = +params[1]['page'] || 1;
+ return this.ghas.getUserFollowing(params[0]['login'], this.page, this.perPage)
+})
+   )).subscribe(theFollowing => console.log(theFollowing));
   }
 
+
+// get the User Following Events
   loadUserFollowing() {
-this.route.params.pipe(switchMap((params: Params) => this.ghas.getUserFollowing(params['login'],this.page, this.perPage)))
-    .subscribe(theFollowing => this.theFollowing = theFollowing);
-    // .subscribe(theFollowing => console.log( `logged Subscribed value`,theFollowing) );    
-  }
+  combineLatest(this.route.parent.params, this.route.queryParams)
+   .pipe(switchMap(
+     ((params: Params[]) => {
+ this.page = +params[1]['page'] || 1;
+ return this.ghas.getUserFollowing(params[0]['login'], this.page, this.perPage)
+})
+   )).subscribe(theFollowing => this.theFollowing = theFollowing);
+ }; 
+  
 
   ngOnInit() {
     this.loadUserFollowing();
