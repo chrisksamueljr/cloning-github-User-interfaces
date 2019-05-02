@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -16,14 +17,18 @@ import { SharedModule } from './shared/shared.module';
 
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { RootRoutingModule } from './root-routing.module';
 import { RepoReadmeComponent } from './repo/repo-readme/repo-readme.component';
+import { RepositorySearchInputComponent } from './shared/repository-search-input/repository-search-input.component';
 import { RepoEventsComponent } from './repo/repo-events/repo-events.component';
 
 @NgModule({
   declarations: [
     RootComponent,
     RepoComponent,
+    RepositorySearchInputComponent,
     TopReposComponent,
     RepoReadmeComponent,
     RepoEventsComponent,
@@ -32,7 +37,9 @@ import { RepoEventsComponent } from './repo/repo-events/repo-events.component';
   imports: [
     BrowserModule,
     MatToolbarModule,
+    MatFormFieldModule,
     MatButtonToggleModule,
+    MatInputModule,
     FormsModule,
     RootRoutingModule,
     HttpClientModule,

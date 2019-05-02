@@ -14,9 +14,9 @@
     <input ngbButton type="radio" [value]="30"> Month
   </label>
 </div>
-<!-- <pre>{{repo.items | json }}</pre> -->
- <div *ngIf="repo.items">
-  <div *ngFor="let r of repo.items;" class="media">
+<!-- <pre>{{repo| json }}</pre> -->
+ <div *ngIf="response">
+  <div *ngFor="let r of response.items;" class="media">
     <a class="media-left" [routerLink]="['/user', r.owner.login]">
       <img class="media-object" [src]="r.owner.avatar_url" alt height="64" width="64">
     </a>
