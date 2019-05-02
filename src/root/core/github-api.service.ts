@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 // import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, toPromise } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/catch';
 
@@ -20,6 +20,8 @@ import { Event } from '../user/user-events/user-events.types';
 import { Repo } from '../repo/types/repo.types';
 import { EventType } from '../user/user-events/user-events.types';
 import { RepoComponent } from '../repo/repo.component';
+
+import { RepoResponse } from '../repo/types/repo-response.types';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -50,8 +52,8 @@ export class GithubApiService {
     console.log(` ServiceUrl built below:
     ${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars
     `);
-    return this.http.get<Repo[]>(`${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars`);
-
+    return this.http.get<RepoResponse>(`${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars`);
+  
   }
   // Get User
   getUser(login: string): Observable<User> {
