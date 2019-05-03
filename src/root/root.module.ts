@@ -43,7 +43,7 @@ import { RepoEventsComponent } from './repo/repo-events/repo-events.component';
     FormsModule,
     RootRoutingModule,
     HttpClientModule,
-    NgbModule.forRoot(),
+    NgbModule,
 
     SharedModule,
     CoreModule

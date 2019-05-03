@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 
 import { Repo } from '../repo/types/repo.types';
 import { RepoResponse } from '../repo/types/repo-response.types';
