@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 // import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
-import { catchError, toPromise } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/catch';
 
@@ -45,7 +45,7 @@ export class GithubApiService {
     return Promise.reject(error.message || error);
   }
 
-  getPopularRepos(from: Date): Observable<Repo[]> {
+  getPopularRepos(from: Date): Observable<RepoResponse> {
     let formattedDate = moment(from).utc().format('YYYY-MM-DD');
     // let params = new HttpParams();
     // params = params.set('HttpParams', formattedDate);
