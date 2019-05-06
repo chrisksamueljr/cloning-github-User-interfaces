@@ -1,11 +1,8 @@
-{{ repos | json }}
-
-<!-- <div *ngIf="repos">
+<div *ngIf="singleRepo">
 <h4>
 	<i class="fa fa-book fa-fw text-muted" aria-hidden="true"></i>
-	<a [routerLink]="['/user', repos.owner.login]"> -->
-<!-- {{repo.owner.login}}
-
+	<a [routerLink]="['/user', singleRepo.owner.login]">
+{{singleRepo.owner.login}}
 	</a>&#47;
 </h4>
-</div> -->
+</div>

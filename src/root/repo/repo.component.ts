@@ -21,9 +21,7 @@ import { Observable, combineLatest } from 'rxjs';
 })
 export class RepoComponent implements OnInit {
 
-  repos: Repo[];
-  // page: number;
-  // perPage = 51;
+  singleRepo: Repo;
 
   constructor(
     private ghas: GithubApiService,
@@ -31,19 +29,19 @@ export class RepoComponent implements OnInit {
     private location: Location
   ) { 
 
-    // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
-    this.activatedRoute.params.pipe(switchMap((params: Params) => 
-    // console.log(params)
-    this.ghas.getRepo(params['owner'], params['name'])))
-    // .subscribe(repos => console.log(repos));
-    .subscribe(repos => this.repos = repos );
+    
   }
 
 
 
   ngOnInit() {
 
-
+// this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+    this.activatedRoute.params.pipe(switchMap((params: Params) => 
+    // console.log(params)
+    this.ghas.getRepo(params['owner'], params['name'])))
+    // .subscribe(repos => console.log(repos));
+    .subscribe(singleRepo => this.singleRepo = singleRepo );
   
   }
 

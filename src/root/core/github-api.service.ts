@@ -63,10 +63,10 @@ export class GithubApiService {
   }
 
 
-  // Get Repo
-  getRepo(login: string): Observable<Repo[]> {
-    console.log(`getUser(): ${this.configurationURL}users/${login}`)
-    return this.http.get<Repo[]>(`${this.configurationURL}users/${login}`);
+  // Get a Single Repo
+  getRepo(owner: string, repoName: string): Observable<Repo> {
+    console.log(`getRepo(): ${this.configurationURL}repos/${owner}/${repoName}`)
+    return this.http.get<Repo[]>(`${this.configurationURL}repos/${owner}/${repoName}`);
   }
 
   // searchRepos   
@@ -115,7 +115,7 @@ export class GithubApiService {
   }
 
   // Get Repo Events
-  getRepoEvents(owner: string, repoName: string, page = 1, perPage: number): Observable<Repo[]> {
+  getRepoEvents(owner: string, repoName: string, page = 1, perPage: number): Observable<Event[]> {
     console.log(`getRepoEvents(): ${this.configurationURL}/repos/${owner}/${repoName}/events?page=${page}&per_page=${perPage}`);
     return this.http.get<Repo[]>(`${this.configurationURL}/repos/${owner}/${repoName}/events?page=${page}&per_page=${perPage}`)
   }
