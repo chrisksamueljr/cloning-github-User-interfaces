@@ -29,17 +29,21 @@ export class RepoComponent implements OnInit {
     private ghas: GithubApiService,
     private activatedRoute: ActivatedRoute,
     private location: Location
-  ) { }
+  ) { 
+
+    // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+    this.activatedRoute.params.pipe(switchMap((params: Params) => 
+    // console.log(params)
+    this.ghas.getRepo(params['owner'], params['name'])))
+    // .subscribe(repos => console.log(repos));
+    .subscribe(repos => this.repos = repos );
+  }
 
 
 
   ngOnInit() {
 
-    // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
-    this.activatedRoute.params.pipe(switchMap((params: Params) => 
-    // console.log(params)
-    this.ghas.getRepo(params['login'])))
-    .subscribe(repos => console.log(repos));
+
   
   }
 
