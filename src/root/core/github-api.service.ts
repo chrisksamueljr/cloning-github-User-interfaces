@@ -66,7 +66,7 @@ export class GithubApiService {
   // Get a Single Repo
   getRepo(owner: string, repoName: string): Observable<Repo> {
     console.log(`getRepo(): ${this.configurationURL}repos/${owner}/${repoName}`)
-    return this.http.get<Repo[]>(`${this.configurationURL}repos/${owner}/${repoName}`);
+    return this.http.get<Repo>(`${this.configurationURL}repos/${owner}/${repoName}`);
   }
 
   // searchRepos   
@@ -109,15 +109,15 @@ export class GithubApiService {
   }
 
   // Get Repository Readme file
-  getRepoReadme(owner: string, repoName: string): Observable<Repo[]> {
+  getRepoReadme(owner: string, repoName: string): Observable<string> {
     console.log(`getRepoReadme(): ${this.configurationURL}repos/${owner}/${repoName}/readme`);
-    return this.http.get<Repo[]>(`${this.configurationURL}repos/${owner}/${repoName}/readme`)
+    return this.http.get<string>(`${this.configurationURL}repos/${owner}/${repoName}/readme`)
   }
 
   // Get Repo Events
   getRepoEvents(owner: string, repoName: string, page = 1, perPage: number): Observable<Event[]> {
     console.log(`getRepoEvents(): ${this.configurationURL}/repos/${owner}/${repoName}/events?page=${page}&per_page=${perPage}`);
-    return this.http.get<Repo[]>(`${this.configurationURL}/repos/${owner}/${repoName}/events?page=${page}&per_page=${perPage}`)
+    return this.http.get<Event[]>(`${this.configurationURL}/repos/${owner}/${repoName}/events?page=${page}&per_page=${perPage}`)
   }
 
 /**
