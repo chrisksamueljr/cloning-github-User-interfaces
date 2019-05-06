@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { RootComponent } from './root.component';
 
 
-import { RepoComponent } from './repo/repo.component';
 import { TopReposComponent } from './top-repos/top-repos.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -20,18 +19,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { RootRoutingModule } from './root-routing.module';
-import { RepoReadmeComponent } from './repo/repo-readme/repo-readme.component';
 import { RepositorySearchInputComponent } from './shared/repository-search-input/repository-search-input.component';
-import { RepoEventsComponent } from './repo/repo-events/repo-events.component';
+
 
 @NgModule({
   declarations: [
     RootComponent,
-    RepoComponent,
     RepositorySearchInputComponent,
     TopReposComponent,
-    RepoReadmeComponent,
-    RepoEventsComponent,
+
 
   ],
   imports: [
