@@ -1,3 +1,8 @@
-<p>
-{{repoReadme | json}}
-</p>
+<!-- 
+	Created Pipe using the marked library and
+	we are able to render the encoded content 
+
+	Next: DecodeURIComponent
+ -->
+
+<p [innerHTML]="repoReadme.content "></p>

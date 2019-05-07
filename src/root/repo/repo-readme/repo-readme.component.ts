@@ -19,19 +19,26 @@ export class RepoReadmeComponent implements OnInit {
     private ghas: GithubApiService,
     private activatedRoute: ActivatedRoute,
     private location: Location
-  ) { 
+  ) {
 
-    
-  }
-ngOnInit() {  
-
-// this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
+    // this.activatedRoute.params.subscribe(data => console.log(data)); // {login: "user-name"}
     this.activatedRoute.params.pipe(switchMap((params: Params) => 
     // console.log(params)
     this.ghas.getRepoReadme(params['owner'], params['name'])))
-    // .subscribe(repos => console.log(repos));
+    // .subscribe(repos => console.log(repoReadme));
     .subscribe(repoReadme => this.repoReadme = repoReadme );
-  
   }
+
+  decodeTheReadMeContent(readmeFile) {
+    const file = readmeFile;
+    console.log(`Calling the decodeTheReadMeContent()`);
+  }
+
+
+
+ngOnInit() {  
+
+  }
+
 
 }

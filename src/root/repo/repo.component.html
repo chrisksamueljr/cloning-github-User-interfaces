@@ -25,7 +25,7 @@
 <a [href]="singleRepo.homepage">
 {{singleRepo.homepage}}
 </a>
-<small>Updated {{ singleRepo.updated_at }}</small>
+<small>Updated {{ singleRepo.updated_at  | date: 'MMM d, yyyy'}}</small>
 
 </p>
 

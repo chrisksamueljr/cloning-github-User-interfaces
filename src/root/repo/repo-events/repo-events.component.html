@@ -1,3 +1,13 @@
-<p>
-  repo-events works!
-</p>
+<!-- {{ events[0] | json}} -->
+<div *ngIf="events">
+  <ul class="mt-2 list-unstyled">
+    <li *ngFor="let event of events">
+        <!-- <event-card-view [event]="event"></event-card-view> -->
+    </li>
+  </ul>
+  <p *ngIf="events.length==0">
+    No User Event to list! 
+  </p>
+</div>
+
+
