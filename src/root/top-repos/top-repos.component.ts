@@ -14,7 +14,7 @@ export class TopReposComponent implements OnInit {
 
   // repo: Repo[];
   response: RepoResponse;
-  dayInterval: number = 1;
+  dayInterval: number ;
 
 
   constructor(
@@ -22,6 +22,7 @@ export class TopReposComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dayInterval = 30
      this.loadRepos();
     //  console.log(this.repo);
    }
