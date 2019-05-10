@@ -1,7 +1,17 @@
-<form class="form-inline float-xs-left">
-  <input name="search" 
+
+
+<div class="input-group input-group-sm mb-3 padding">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+  </div>
+  <input  type="text" class="form-control" 
+  		  aria-label="Sizing example input" 
+  		  aria-describedby="inputGroup-sizing-sm"
+ 		  class="form-control padding"
+  	     name="search" 
          placeholder="Search repos" 
          type="text" 
          (input)="term$.next($event.target.value)"
-  />
-</form>
+         [ngbTypeahead]="search"
+  			>
+</div>

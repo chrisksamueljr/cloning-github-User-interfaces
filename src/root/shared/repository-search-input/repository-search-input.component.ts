@@ -2,12 +2,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable,of, Subject } from 'rxjs';
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/map';
-import { debounceTime,distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
-// import 'rxjs/add/operator/distinctUntilChanged';
-// import 'rxjs/add/operator/switchMap';
+import { Observable, of, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, catchError, map } from 'rxjs/operators';
+
 import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -25,6 +22,18 @@ export class RepositorySearchInputComponent implements OnInit {
   public model: any;
    items: Array<string>
    term$ = new Subject<string>()
+
+
+  search = (text$: Observable<string>) =>
+   text$
+    .pipe(
+      debounceTime(200),
+      distinctUntilChanged()
+    //switchMap(t => t ? this.githubApiService.searchRepos(t) : Observable.of<RepoResponse>({})),
+      // map(rs => console.log(rs.map))
+    )
+
+//  ,switchMap(t => t ? this.githubApiService.searchRepos(t) : Observable.of<Repo[]>([])
 //   search = (term: Observable<string>) =>
 //     term.pipe(debounceTime(200)
 //     ,distinctUntilChanged()
@@ -36,7 +45,7 @@ export class RepositorySearchInputComponent implements OnInit {
 //       return of<Repo[]>([]);
 //     })
 //     , map(rs => rs.map(r => r.full_name))
-// )
+//)
       
 
   constructor(
