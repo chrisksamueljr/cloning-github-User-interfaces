@@ -6,3 +6,22 @@
 img {
     padding: 15px;
 }
+
+/* Hide the default browser checkbox */
+.mb-2 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* 
+	Another way to hide the default checkbox 
+	This is not cross browser friendly
+*/
+/* input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}*/
