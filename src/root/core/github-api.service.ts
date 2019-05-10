@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+  import { Injectable } from '@angular/core';
 
 import *  as moment from 'moment';
 
@@ -26,6 +26,7 @@ import { RepoResponse } from '../repo/types/repo-response.types';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +42,6 @@ export class GithubApiService {
   constructor(private http: HttpClient) { }
   private handleError(error: any): Promise<any> {
     console.log('An Error occured', error);
-
     return Promise.reject(error.message || error);
   }
 
@@ -52,6 +52,8 @@ export class GithubApiService {
     console.log(` ServiceUrl built below:
     ${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars
     `);
+
+
     return this.http.get<RepoResponse>(`${this.configurationURL}${this.popularRepoUrl}${formattedDate}&sort=stars`);
   
   }
@@ -111,7 +113,9 @@ export class GithubApiService {
   // Get Repository Readme file
   getRepoReadme(owner: string, repoName: string): Observable<string> {
     console.log(`getRepoReadme(): ${this.configurationURL}repos/${owner}/${repoName}/readme`);
-    return this.http.get<string>(`${this.configurationURL}repos/${owner}/${repoName}/readme`)
+     let payload = this.http.get<string>(`${this.configurationURL}repos/${owner}/${repoName}/readme`)
+    // return  decodeURIComponent(escape(atob(payload)));
+    return payload
   }
 
   // Get Repo Events
