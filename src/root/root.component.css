@@ -1,4 +1,7 @@
 .container {
-    background-color: #464345;
+    background-color: #24292e;
     color: #fff;
+}
+.padding {
+	padding: 0;
 }

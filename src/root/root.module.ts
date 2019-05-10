@@ -22,11 +22,13 @@ import { RootRoutingModule } from './root-routing.module';
 import { RepositorySearchInputComponent } from './shared/repository-search-input/repository-search-input.component';
 
 
+
 @NgModule({
   declarations: [
     RootComponent,
     RepositorySearchInputComponent,
     TopReposComponent,
+    
 
 
   ],

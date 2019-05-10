@@ -1,9 +1,19 @@
-<div  style="text-align:center" class="container">
-    <a routerLink="/" class="navbar-brand">
-    <i class="fa fa-github" aria-hidden="true"> Explorer </i>
+<div  class="container-fluid">
+   <div class="row">
+   <div class="col-sm">
+ <a routerLink="/" class="navbar-brand">
+    <i class="fa fa-github" height="32" width="32" aria-hidden="true"> Explorer </i>
     </a>
-    <repo-search-box></repo-search-box>
+   
+   </div>
+   <div class="col-sm">
+ <repo-search-box></repo-search-box>
+   </div>
+    <div class="col-sm padding">
+  	<span> Brought to you by:  Angular Typescript </span>
   </div>
+  </div>
+
 <div class="container">  
 <router-outlet></router-outlet>
 </div>
