@@ -5,13 +5,24 @@ import {LargeNumberShortenPipe} from  './large-number-shorten.pipe';
 // import { EventCardViewComponent } from './event-card-view/event-card-view.component';
 
 
+import { MarkedDownPipe } from './marked-down.pipe';
+
 @NgModule({
-  declarations: [LargeNumberShortenPipe, 
+  declarations: [
+  LargeNumberShortenPipe, 
+  MarkedDownPipe
     // RepositorySearchInputComponent, 
     // EventCardViewComponent
   ],
   imports: [
     CommonModule
+  ],
+  providers: [],
+  exports: [
+ 	 CommonModule,
+ 	 LargeNumberShortenPipe,
+ 	 MarkedDownPipe
+
   ]
 })
 export class SharedModule { }
