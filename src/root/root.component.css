@@ -2,6 +2,11 @@
     background-color: #24292e;
     color: #fff;
 }
-.padding {
-	padding: 0;
+.some-padding {
+  padding-top: 10px;
+}
+
+.toolbar-style  {
+ background-color: #000;
+ height: 50px;
 }
