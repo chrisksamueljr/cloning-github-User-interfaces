@@ -1,8 +1,8 @@
-<div style="text-align:center">
+<div >
   <h2>Top Popular Repositories</h2>
 </div>
 <hr>
-<div style="text-align:center" [(ngModel)]="dayInterval" (ngModelChange)="loadRepos()" ngbRadioGroup name="radioBasic"
+<div [(ngModel)]="dayInterval" (ngModelChange)="loadRepos()" ngbRadioGroup name="radioBasic"
   class="mb-2">
   <label ngbButtonLabel class="btn btn-primary">
     <input ngbButton type="radio" [value]="1"> Day
